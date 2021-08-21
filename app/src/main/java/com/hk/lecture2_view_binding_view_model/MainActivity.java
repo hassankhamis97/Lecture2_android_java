@@ -2,6 +2,7 @@ package com.hk.lecture2_view_binding_view_model;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -18,8 +19,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-
-        User user = new User("Hassan", "hassan@gmail.com", 25);
-        binding.setUser(user);
+        initObservers();
+        mainViewModel.setData();
     }
+
+    private void initObservers() {
+        mainViewModel.userMutableLiveData.observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                binding.setUser(user);
+            }
+        });
+    }
+
+
 }
