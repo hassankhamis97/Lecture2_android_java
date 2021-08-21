@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 
         setContentView(binding.getRoot());
+        // TODO handle string file for arabic
         binding.textView.setText("Welcome");
     }
 }
